@@ -82,7 +82,7 @@ class ImageReader(Dataset):
         path, target = self.images[index], self.labels[index]
         #img = Image.open(path).convert('RGB')
         img = cv2.imread(path)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = self.transform(image=img)["image"]
         return img, target
 
