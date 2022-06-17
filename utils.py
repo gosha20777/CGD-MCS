@@ -9,6 +9,7 @@ from torch.utils.data.sampler import Sampler
 from torchvision import transforms
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
+import cv2
 
 test_transform = A.Compose([
         A.Resize(always_apply=False, p=1.0, height=224, width=224, interpolation=0),
