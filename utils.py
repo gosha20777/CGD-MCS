@@ -20,32 +20,23 @@ test_transform = A.Compose([
 train_transform = A.Compose([
         A.Resize(always_apply=False, p=1.0, height=504, width=504, interpolation=0),
         A.RandomCrop(always_apply=False, p=1.0, height=448, width=448),
-        A.Flip(),
-        A.Transpose(),
-        A.ElasticTransform(p=0.2),
+        A.HorizontalFlip(),
         A.OneOf([
             A.GaussNoise(),
-            A.ISONoise()
+            A.ISONoise(),
+            A.CoarseDropout(always_apply=False, max_holes=10, max_height=15, max_width=15, min_holes=5, min_height=2, min_width=2)
         ], p=0.2),
-        A.CoarseDropout(always_apply=False, p=0.2, max_holes=25, max_height=20, max_width=20, min_holes=10, min_height=8, min_width=8),
-        A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.2, rotate_limit=30, p=0.6),
-        A.OneOf([
-            A.OpticalDistortion(p=0.3),
-            A.GridDistortion(p=.1),
-        ], p=0.2),
+        A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.2, rotate_limit=5, p=0.6),
         A.OneOf([
             A.CLAHE(clip_limit=2),
-            A.RandomBrightnessContrast(),
-            A.RandomGamma(always_apply=False, p=1.0, gamma_limit=(57, 160), eps=1e-07)            
+            A.RandomBrightnessContrast()            
         ], p=0.3),
-        A.HueSaturationValue(p=0.3),
         A.OneOf([
             A.RGBShift(),
             A.ChannelDropout(),
             A.ChannelShuffle(),
             A.Equalize(),
-            A.HueSaturationValue(),
-            A.InvertImg()
+            A.HueSaturationValue()
         ], p=0.8),
         A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
         ToTensorV2()
