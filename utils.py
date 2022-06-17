@@ -12,14 +12,14 @@ from albumentations.pytorch import ToTensorV2
 import cv2
 
 test_transform = A.Compose([
-        A.Resize(always_apply=False, p=1.0, height=224, width=224, interpolation=0),
+        A.Resize(always_apply=False, p=1.0, height=448, width=448, interpolation=0),
         A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
         ToTensorV2()
     ])
 
 train_transform = A.Compose([
-        A.Resize(always_apply=False, p=1.0, height=252, width=252, interpolation=0),
-        A.RandomCrop(always_apply=False, p=1.0, height=224, width=224),
+        A.Resize(always_apply=False, p=1.0, height=504, width=504, interpolation=0),
+        A.RandomCrop(always_apply=False, p=1.0, height=448, width=448),
         A.Flip(),
         A.Transpose(),
         A.ElasticTransform(p=0.2),
