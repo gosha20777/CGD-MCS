@@ -4,9 +4,9 @@ outdir: './experiments/'
 num_gpu: 1
 
 dataset:
-    root: '../CompCars/data/image/'
-    train_list: '../CompCars/annotation/train.txt'
-    val_list: '../CompCars/annotation/val.txt'
+    root: '../data/CompCars/data/image/'
+    train_list: '../data/CompCars/annotation/train.txt'
+    val_list: '../data/CompCars/annotation/val.txt'
     seed: 42
     num_of_classes: 1716
     input_size: 224

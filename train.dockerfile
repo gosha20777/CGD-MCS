@@ -18,8 +18,8 @@ RUN wget \
 
 RUN conda init bash
 RUN conda install pytorch torchvision torchaudio cudatoolkit=11.3 -c pytorch -y \
-    && conda install jupyter -y \
-    && bash -c "pip install opencv-python thop onnx albumentations"
+    && conda install jupyter pandas -y \
+    && bash -c "pip install opencv-python thop onnx albumentations protobuf==3.20.*"
 
 
 EXPOSE 8888

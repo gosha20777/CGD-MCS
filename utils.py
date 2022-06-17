@@ -10,6 +10,11 @@ from torchvision import transforms
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 
+test_transform = A.Compose([
+        A.Resize(always_apply=False, p=1.0, height=224, width=224, interpolation=0),
+        A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225)),
+        ToTensorV2()
+    ])
 
 train_transform = A.Compose([
         A.Resize(always_apply=False, p=1.0, height=252, width=252, interpolation=0),
@@ -66,7 +71,8 @@ class ImageReader(Dataset):
             #self.transform = transforms.Compose([transforms.Resize((252, 252)), transforms.RandomCrop(224),
             #                                     transforms.RandomHorizontalFlip(), transforms.ToTensor(), normalize])
         else:
-            self.transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor(), normalize])
+            self.transform = test_transform
+            #self.transform = transforms.Compose([transforms.Resize((224, 224)), transforms.ToTensor(), normalize])
         self.images, self.labels = [], []
         for label, image_list in data_dict.items():
             self.images += image_list
@@ -74,8 +80,10 @@ class ImageReader(Dataset):
 
     def __getitem__(self, index):
         path, target = self.images[index], self.labels[index]
-        img = Image.open(path).convert('RGB')
-        img = self.transform(image=image)["image"]
+        #img = Image.open(path).convert('RGB')
+        img = cv2.imread(path)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB
+        img = self.transform(image=img)["image"]
         return img, target
 
     def __len__(self):
