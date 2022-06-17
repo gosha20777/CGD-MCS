@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.7.0-base-ubuntu22.04
+FROM nvidia/cuda:11.6.2-base-ubuntu20.04
 RUN apt update && \
     apt install -y wget ffmpeg libsm6 libxext6 && \
     apt clean && \
